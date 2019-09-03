@@ -40,7 +40,9 @@ class Gate {
         }
       }
       operands.push(rawData.slice(operandBegining,rawData.length - 1))
-      if(level !== 0) throw "Error parsing Gate, parenthesis are wrong.";
+      if(level !== 0) {
+        throw "Error parsing Gate, parenthesis are wrong.";
+      }
       return new Gate(operator, operands.map((operand) => Gate.parse(operand)))
     }else{
       return new Value(rawData)
@@ -52,6 +54,14 @@ class Gate {
     this.getVariablesRecursive(variables)
     return variables
   }
+
+  get variablesObj():objectOfBooleans{
+    return this.variables.reduce((result:objectOfBooleans, variableName) => {
+      result[variableName] = false;
+      return result;
+    }, {})
+  }
+
   
   getVariablesRecursive(variables:string[]) {
     for (const operand of this.operands) {
@@ -78,5 +88,11 @@ class Value{
     let variables:string[] = []
     this.getVariablesRecursive(variables)
     return variables
+  }
+  get variablesObj():objectOfBooleans{
+    return this.variables.reduce((result:objectOfBooleans, variableName) => {
+      result[variableName] = false;
+      return result;
+    }, {})
   }
 }
