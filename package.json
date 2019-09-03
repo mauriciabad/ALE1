@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/mauriciabad/ALE1/issues"
   },
-  "homepage": "https://github.com/mauriciabad/ALE1#readme"
+  "homepage": "https://github.com/mauriciabad/ALE1#readme",
+  "devDependencies": {
+    "typescript": "^3.6.2"
+  }
 }
