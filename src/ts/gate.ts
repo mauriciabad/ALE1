@@ -1,6 +1,4 @@
-type operator = unaryOperator | binaryOperator
-type unaryOperator = '¬'
-type binaryOperator = '|' | '&' | '=' | '>'
+type operator = '¬' | '|' | '&' | '=' | '>'
 type objectOfBooleans = {[s: string]: boolean}
 
 class Gate {
@@ -24,8 +22,8 @@ class Gate {
 
   static parse(rawData:string): Gate|Value{
     rawData = rawData.replace(/\s/g, '');
-    let operator:operator = rawData.match(/$[¬|&=>]/)[0] as operator
-    if(operator){
+    if('¬|&=>'.indexOf(rawData[0]) > -1){
+      let operator:operator = rawData[0] as operator
       let operands:string[] = []
       let level = 0;
       let operandBegining = 2
@@ -35,7 +33,7 @@ class Gate {
           case ')': --level; break;
           case ',': 
             if(level === 0) {
-              operands.push(rawData.substr(operandBegining,i))
+              operands.push(rawData.slice(operandBegining,i))
               operandBegining = i + 1;
             }
             break;
@@ -49,7 +47,7 @@ class Gate {
   }
   
   get variables():string[]{
-    let variables = []
+    let variables:string[] = []
     this.getVariablesRecursive(variables)
     return variables
   }
