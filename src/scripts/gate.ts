@@ -1,5 +1,5 @@
 type operator = '¬' | '|' | '&' | '=' | '>'
-type objectOfBooleans = {[s: string]: boolean}
+type objectOfBooleans = {[key: string]: boolean}
 
 class Gate {
   operator:operator
@@ -73,4 +73,9 @@ class Value{
     if(!variables.includes(this.name)) variables.push(this.name)
   }
 
+  get variables():string[]{
+    let variables:string[] = []
+    this.getVariablesRecursive(variables)
+    return variables
+  }
 }

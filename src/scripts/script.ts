@@ -1,8 +1,8 @@
-const inputElement = document.getElementById('input-prefix-proposition');
-const outputElement = document.getElementById('output');
+const inputElement = <HTMLInputElement>document.getElementById('input-prefix-proposition');
+const outputElement = <HTMLInputElement>document.getElementById('output');
 
 var input = inputElement.value;
-var output = '';
+var output = false;
 
 const values = {
   A: true,
@@ -16,11 +16,11 @@ const values = {
 }
 
 var proposition = Gate.parse(input);
-var variables = proposition.variables.reduce(function(result, variableName, i) {
-  result[i] = variableName;
+var variables:objectOfBooleans = proposition.variables.reduce((result:objectOfBooleans, variableName) => {
+  result[variableName] = false;
   return result;
 }, {})
 console.log(variables);
-output = proposition.evaluate();
+output = proposition.evaluate(variables);
 
-outputElement.textContent = output;
+outputElement.value = output ? 'true':'false';
