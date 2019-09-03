@@ -23,4 +23,4 @@ var variables:objectOfBooleans = proposition.variables.reduce((result:objectOfBo
 console.log(variables);
 output = proposition.evaluate(variables);
 
-outputElement.value = output ? 'true':'false';
+outputElement.checked = output;
