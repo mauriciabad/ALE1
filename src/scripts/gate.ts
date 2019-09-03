@@ -15,8 +15,8 @@ class Gate {
       case '¬': return !this.operands[0].evaluate(values)    
       case '|': return this.operands[0].evaluate(values) || this.operands[1].evaluate(values)
       case '&': return this.operands[0].evaluate(values) && this.operands[1].evaluate(values)
-      case '=': return this.operands[0].evaluate(values) && this.operands[1].evaluate(values) // TODO: this is a stub, use the actual function
-      case '>': return this.operands[0].evaluate(values) && this.operands[1].evaluate(values) // TODO: this is a stub, use the actual function
+      case '=': return (this.operands[0].evaluate(values) && this.operands[1].evaluate(values)) || (!this.operands[0].evaluate(values) && !this.operands[1].evaluate(values))
+      case '>': return !this.operands[0].evaluate(values) || this.operands[1].evaluate(values)
     }
   }
 
@@ -39,6 +39,7 @@ class Gate {
             break;
         }
       }
+      operands.push(rawData.slice(operandBegining,rawData.length - 1))
       if(level !== 0) throw "Error parsing Gate, parenthesis are wrong.";
       return new Gate(operator, operands.map((operand) => Gate.parse(operand)))
     }else{

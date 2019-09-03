@@ -21,6 +21,7 @@ var variables:objectOfBooleans = proposition.variables.reduce((result:objectOfBo
   return result;
 }, {})
 console.log(variables);
+console.log(proposition);
 output = proposition.evaluate(variables);
 
 outputElement.checked = output;

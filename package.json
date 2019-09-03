@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc"
+    "start": "tsc && html-minifier --input-dir ./src/layout --output-dir ./dist"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/mauriciabad/ALE1#readme",
   "devDependencies": {
+    "html-minifier": "^4.0.0",
+    "postcss": "^7.0.17",
     "typescript": "^3.6.2"
   }
 }
