@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "tsc && cp -r src/styles dist/styles && html-minifier --input-dir ./src/layout --output-dir ./dist"
+    "start": "npm run build",
+    "build": "tsc && cp -r src/styles dist/styles && html-minifier --input-dir ./src/layout --output-dir ./dist"
   },
   "repository": {
     "type": "git",
