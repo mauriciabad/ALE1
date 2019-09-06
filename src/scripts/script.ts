@@ -2,20 +2,10 @@ const inputElement = <HTMLInputElement>document.getElementById('input-prefix-pro
 const outputElement = document.getElementById('output')!;
 const variablesElement = document.getElementById('variables')!;
 
-var input = inputElement.value;
+var proposition
+var variables:objectOfBooleans
 
-try {
-  var proposition = Gate.parse(input);
-  inputElement.classList.remove('invalid')
-  var variables:objectOfBooleans = proposition.variablesObj
-  variablesElement.textContent = JSON.stringify(variables,null,2)
-  console.log(variables);
-  console.log(proposition);
-  outputElement.textContent = proposition.evaluate(variables).toString();
-} catch (error) {
-  inputElement.classList.add('invalid')
-}
-
+updateProposition(inputElement.value)
 
 function updateProposition(rawData:string) {
   try{
@@ -24,7 +14,11 @@ function updateProposition(rawData:string) {
     variables = proposition.variablesObj
     variablesElement.textContent = JSON.stringify(variables,null,2)
     outputElement.textContent = proposition.evaluate(variables).toString();
+    console.log(variables);
+    console.log(proposition);
   }catch(error){
     inputElement.classList.add('invalid')
+    outputElement.textContent = 'undefined'
+    variablesElement.textContent = ''
   }
 }
